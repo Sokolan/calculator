@@ -1,0 +1,198 @@
+html {
+    height: 100%;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    font-family: 'Roboto', sans-serif;
+    gap: 40px;
+    min-height: 100%;
+    background-color: #93867F;
+}
+
+.header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #595F59;
+    color: rgb(255, 187, 0)
+}
+
+.calculator {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid rgb(100, 94, 94);
+    border-radius: 8%;
+    height: 540px;
+    width: 300px;
+    padding: 10px;
+    background-color: #dee2db;
+}
+
+.display-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px;
+    margin: 15px;
+    border: 5px solid rgb(0, 43, 0);
+    border-radius: 10px;
+    background-color: #70ffa9;
+    color: rgb(255, 255, 255);
+}
+
+.prev-container {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    font-weight: 400;
+    margin-right: 2px;
+    height: 15px;
+}
+
+.curr-number {
+    font-size: 25px;
+    font-weight: 700;
+    transition-duration: 1s;
+}
+
+.calc-body {
+    padding: 10px;
+    height: 450px;
+}
+
+.operations-container {
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    height: 60px;
+    padding-left: 8px;
+}
+
+.operations-container > * ,
+.clear,  .del , .equal {
+    height: 60px;
+    width: 60px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    background-color: #b8ffb1;
+    color: rgb(32, 32, 32);
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.clear, .del{
+    width: 60px;
+    height: 60px;
+}
+
+.equal {
+    width: 60px;
+    height: 180px
+}
+
+.nums-utils {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 320px;
+}
+
+.numbers-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 300px;
+    padding: 8px 0px;
+}
+
+.row {
+    display: flex;
+    padding: 0px 8px;
+    justify-content: space-between;
+}
+
+.number , .sign, .decimal {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    height: 60px;
+    background-color: #ffffff;
+    border: 3px solid rgb(77, 105, 77);
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.number:hover , .sign:hover, .decimal:hover {
+    background-color: #BAC7BE;
+    color: #4d4e00;
+    border: 2px solid black;
+    border-radius: 40%;
+}
+
+.util-container{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    justify-content: space-between;
+    width: 100px;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+.util-container > button:hover, 
+.operations-container > button:hover {
+    background-color: #5cd451;
+    color: white;
+    font-weight: 800;
+    font-size: 25px;
+    border-radius: 50%;
+}
+
+.equal, .clear {
+    background-color: #c92424;
+}
+
+.del {
+    background-color: #ff7b00;
+}
+
+button.del:hover {
+    background-color: #ff5e00;
+}
+
+button.clear:hover {
+    background-color: #ff0000;
+}
+
+button.equal:hover {
+    border-radius: 0%;
+    font-size: 30px;
+    background-color: #ff0000;
+    transition-duration: 0.8s;
+}
+
+button {
+    transition-duration: 0.4s;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: #1E201E;
+    color: white;
+
+}

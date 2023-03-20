@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="javascript.js" defer></script> 
+</head>
+<body>
+    <div class="header">
+        <h1>calculator App</h1>
+    </div>
+    <div class="calculator">
+        <div class="display-container">
+            <div class="prev-container">
+                <div class="prev-number"></div>
+                <div class="operation"></div>
+            </div>
+            <div class="curr-number">0</div>
+        </div>
+        <div class="calc-body">
+            <div class="operations-container">
+                <button class="add">+</button>
+                <button class="sub">-</button>
+                <button class="mul">x</button>
+                <button class="div">/</button>
+            </div>
+            <div class="nums-utils">
+                <div class="numbers-container">
+                    <div class="row">
+                        <button onclick="signClickedEvent()" class="sign">+/-</button>
+                        <button onclick="dotClickedEvent()" class="decimal">.</button>
+                    </div>
+                </div>
+                <div class="util-container">
+                    <button onclick="delClickedEvent()" class="del">del</button>
+                    <button onclick="clearClickedEvent()" class="clear">AC</button>
+                    <button onclick="equalClickedEvent()" class="equal">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <h4>&copy;  Designed and coded by Sokolan</h4>
+    </div>
+</body>
+</html>
