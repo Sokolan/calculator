@@ -1,7 +1,8 @@
-MAX_NUM_LEN = 10;
+MAX_MAIN_LEN = 12;
+MAX_RES_LEN = 16;
+MAX_PREV_LEN = 40;
 let mainDisplay = '0';
 let prevDisplay = '';
-let opDisplay = '';
 
 function polluteMainDisplay(){
     let container = document.querySelector('.curr-number');
@@ -10,13 +11,14 @@ function polluteMainDisplay(){
 
 function pollutePrevDisplay(){
     const container = document.querySelector('.prev-number');
+    if(prevDisplay.length >= MAX_PREV_LEN){
+        alert('Seconadary display max lenght exceeded!');
+        clearClickedEvent();
+    }
     container.textContent = prevDisplay;
 }
 
-function polluteOpDisplay(){
-    const container = document.querySelector('.operation');
-    container.textContent = opDisplay;
-}
+
 
 // Numbers functions
 function createButtons(){
@@ -43,7 +45,7 @@ function createButtons(){
 }
 
 function numClickedEvent(){
-    if(mainDisplay.length >= MAX_NUM_LEN){
+    if(mainDisplay.length >= MAX_MAIN_LEN){
         alert("Number maximum length has been reached!");
         return;
     }
@@ -85,13 +87,7 @@ function dotClickedEvent(){
 
 // Operations functions
 function operationClicked(){
-    opDisplay = this.textContent;
-    polluteOpDisplay();
-    // If we already have prev number, allow to change the operand.
-    if(prevDisplay !== ''){
-        return 
-    }
-    prevDisplay = mainDisplay
+    prevDisplay += `${mainDisplay} ${this.textContent} `;
     mainDisplay = '0';
     polluteMainDisplay();
     pollutePrevDisplay();
@@ -114,19 +110,16 @@ function delClickedEvent(){
 function clearClickedEvent(){
     mainDisplay = '0';
     prevDisplay = '';
-    opDisplay = '';
     polluteMainDisplay();
     pollutePrevDisplay();
-    polluteOpDisplay();
-
 }
 
 // Core functions
-function clearOpAndPrev(){
-    prevDisplay = opDisplay = '';
-    polluteOpDisplay();
+function clearPrev(){
+    prevDisplay = '';
     pollutePrevDisplay();
 }
+
 function addFunc(a,b){
     return (a+b).toString();
 }
@@ -147,45 +140,67 @@ function divFunc(a,b){
     return (a/b).toFixed(5).toString();
 }
 
+function operate(lop, operation, rop){
+    switch(operation){
+        case '+':
+            return addFunc(parseFloat(lop),parseFloat(rop));
+        case '-':
+            return subFunc(parseFloat(lop),parseFloat(rop));
+        case 'x':
+            return mulFunc(parseFloat(lop),parseFloat(rop));
+        case '/':
+            return divFunc(parseFloat(lop),parseFloat(rop));
+        default:
+            alert("OPERATION ERROR");
+            return;
+    }
+}
+
+function handleFloat(num){
+    if(num.indexOf('.') === -1){
+        return num;
+    }
+    // Remove .0 zoroes
+    if(num.slice(-1) === '0'){
+        let index = num.length - 1;
+        while(num.charAt(index) === '0' || num.charAt(index) === '.'){
+            if(num.charAt(index) === '.'){
+                --index;
+                break;
+            }
+            --index;
+        }
+        num = num.slice(0,index + 1);
+    }
+    return num;
+}
+
+function handleLen(){
+    if(mainDisplay.length > MAX_RES_LEN){
+        mainDisplay = '0';
+        alert('Num size overflow!');
+    }
+}
+
 function equalClickedEvent(){
     if(prevDisplay === ''){
         return;
     }
-    const lnum = Number.parseFloat(prevDisplay);
-    const rnum = Number.parseFloat(mainDisplay);
-    
-    switch(opDisplay){
-        case '+':
-            mainDisplay = addFunc(lnum, rnum);
-            break;
-        case '-':
-            mainDisplay = subFunc(lnum, rnum);
-            break;
-        case 'x':
-            mainDisplay = mulFunc(lnum, rnum);
-            break;
-        case '/':
-            mainDisplay = divFunc(lnum, rnum);
-            break;
+
+    prevDisplay += mainDisplay;
+    const input = prevDisplay.split(" ");
+    let lnum = input[0];
+
+    for(let i = 1 ; i < (input.length - 1) ; i += 2){
+        lnum = operate(lnum, input[i], input[i + 1]);
+
     }
 
-    // Remove .0 notation
-    if(mainDisplay.length > 1){
-        mainDisplay = mainDisplay.slice(-1) === '0' ? Math.trunc(mainDisplay) : mainDisplay;
-    }
-    // make sure the final result isn't overflowing
-    let intLen = mainDisplay.toString().length;
-    if(mainDisplay.toString().indexOf('.') != -1){
-        intLen = mainDisplay.slice(0, mainDisplay.indexOf('.')).length;
-    }
-
-    if(intLen >= MAX_NUM_LEN){
-        alert('too many integers!');
-        mainDisplay = '0';
-    }
+    lnum = handleFloat(lnum);
+    mainDisplay = lnum;
+    handleLen();
     polluteMainDisplay();
-    clearOpAndPrev();
-
+    clearPrev();
 }
 
 
